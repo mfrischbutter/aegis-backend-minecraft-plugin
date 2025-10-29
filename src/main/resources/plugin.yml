@@ -3,3 +3,7 @@ version: '1.0-SNAPSHOT'
 main: com.luascript.aegisBackend.AegisBackend
 api-version: '1.21'
 authors: [ Michael Frischbutter ]
+description: Backend companion plugin for Aegis Velocity proxy. Receives plugin messages for server-side actions.
+
+channels:
+  - aegis:main
