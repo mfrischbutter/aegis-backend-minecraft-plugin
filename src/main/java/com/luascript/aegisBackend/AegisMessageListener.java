@@ -89,7 +89,7 @@ public class AegisMessageListener implements PluginMessageListener {
             } catch (IllegalArgumentException e) {
                 logger.warning("Invalid sound name received: " + soundName + ". Using default sound.");
                 // Fallback to a default sound if the sound name is invalid
-                sound = Sound.ENTITY_VILLAGER_NO;
+                sound = Sound.BLOCK_NOTE_BLOCK_PLING;
             }
 
             // Play the sound to the player at their location
