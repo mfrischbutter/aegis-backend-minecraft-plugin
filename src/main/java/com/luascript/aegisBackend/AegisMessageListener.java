@@ -3,6 +3,8 @@ package com.luascript.aegisBackend;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -82,10 +84,17 @@ public class AegisMessageListener implements PluginMessageListener {
                 return;
             }
 
-            // Parse sound name to Bukkit Sound enum
+            // Parse sound name to Bukkit Sound using Registry
             Sound sound;
             try {
-                sound = Sound.valueOf(soundName);
+                // Convert enum-style name (ENTITY_VILLAGER_NO) to namespaced key format (entity.villager.no)
+                String namespacedKeyString = soundName.toLowerCase().replace('_', '.');
+                NamespacedKey soundKey = NamespacedKey.minecraft(namespacedKeyString);
+                sound = Registry.SOUNDS.get(soundKey);
+
+                if (sound == null) {
+                    throw new IllegalArgumentException("Sound not found in registry: " + soundName);
+                }
             } catch (IllegalArgumentException e) {
                 logger.warning("Invalid sound name received: " + soundName + ". Using default sound.");
                 // Fallback to a default sound if the sound name is invalid
