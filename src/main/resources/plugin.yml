@@ -1,0 +1,5 @@
+name: aegis-backend
+version: '1.0-SNAPSHOT'
+main: com.luascript.aegisBackend.AegisBackend
+api-version: '1.21'
+authors: [ Michael Frischbutter ]
